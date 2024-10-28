@@ -1,0 +1,73 @@
+{% extends 'perfil.html' %}
+
+
+{% block form_editar_perfil %}
+<div class="container">
+    <h1 class="mt-5">Editar Perfil </h1>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <form method="POST" action="" class="p-4 mt-2" enctype="multipart/form-data">
+                {{form_editarperfil.csrf_token}}
+                
+                <fieldset>
+                    <div class="form-group">
+
+                    {{  form_editarperfil.username.label(class="form-control-label ")  }}
+
+                    {% if form_editarperfil.username.errors %}
+                        {{  form_editarperfil.username(class="form-control is-invalid")  }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_editarperfil.username.errors %}
+                            {{erro}}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{  form_editarperfil.username(class="form-control")  }}
+                    {% endif %}
+
+                    </div>
+
+                    <div class="form-group">
+
+                    {{  form_editarperfil.email.label(class="form-control-label")  }}
+    
+                    {% if form_editarperfil.email.errors %}
+                        {{  form_editarperfil.email(class="form-control is-invalid")  }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_editarperfil.email.errors %}
+                            {{erro}}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{  form_editarperfil.email(class="form-control")  }}
+                    {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                    {{ form_editarperfil.foto_perfil.label }}
+                    {{ form_editarperfil.foto_perfil(class="form-control-file mt-3") }}
+                    {% if form_editarperfil.foto_perfil.errors %}
+                        {% for erro in form_editarperfil.foto_perfil.errors %}
+                        <span class="text-danger">{{ erro }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                    <hr>
+                    <p><h4>Cursos</h4></p>
+                    {% for campo in form_editarperfil  %}
+                        {% if 'curso_' in campo.name %}
+                        <div class="form-group">
+                            {{  campo(class="form-check-input ")  }}
+                            {{  campo.label(class="form-check-label ")  }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </fieldset>
+                    {{  form_editarperfil.botao_submit_editarperfil(class="btn btn-success mt-3")  }}
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
