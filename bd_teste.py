@@ -1,6 +1,5 @@
-from fakepinterest import app, database
-from fakepinterest.models import User, Foto
+from comunidadeimpressionadora import app, database
+from comunidadeimpressionadora.models import Usuario, Post
 
 with app.app_context():
-    database.drop_all()
     database.create_all()
